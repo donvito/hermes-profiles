@@ -1,0 +1,16 @@
+# Hermes profile distribution manifest.
+# Schema: hermes_cli/profile_distribution.py (DistributionManifest) in hermes-agent.
+name: realestate-agent
+version: 0.1.0
+description: "Real-estate assistant — listings, comps, and market watch"
+hermes_requires: ">=0.18.0"
+author: "hermes-profiles maintainers"
+license: "MIT"
+
+env_requires:
+  - name: OPENAI_API_KEY
+    description: "OpenAI API key for model access (or run `hermes -p realestate-agent setup` to pick another provider)"
+    required: false
+  - name: FIRECRAWL_API_KEY
+    description: "Firecrawl key — improves web_extract on listing portals"
+    required: false

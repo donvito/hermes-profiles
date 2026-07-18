@@ -1,0 +1,26 @@
+# Hermes config for the realestate-agent profile.
+# Non-secret settings only — keys live in the profile .env.
+# Preserved on `hermes profile update` (pass --force-config to reset).
+
+model:
+  provider: "auto"
+
+agent:
+  max_turns: 90
+
+skills:
+  template_vars: true
+
+memory:
+  memory_enabled: true
+
+cron:
+  wrap_response: true
+
+# Disabled example MCP server — a filesystem mount for transaction folders.
+# Enable after adjusting the path, or use `hermes -p realestate-agent mcp`.
+mcp_servers:
+  deal-files:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-filesystem", "workspace"]
+    enabled: false

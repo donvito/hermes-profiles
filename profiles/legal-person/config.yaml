@@ -1,0 +1,45 @@
+# Hermes config for the legal-person profile.
+#
+# Non-secret settings only — API keys and tokens belong in the profile's
+# .env file (see .env.EXAMPLE generated at install time).
+#
+# Keys here deep-merge over Hermes' DEFAULT_CONFIG (hermes_cli/config.py).
+# On `hermes profile update` this file is PRESERVED so your local tuning
+# survives; pass --force-config to reset it to the distribution's version.
+
+model:
+  # Resolve provider from whatever the installer has configured/authenticated
+  # (Nous Portal, OpenRouter, Anthropic, ...). Pin a model if you want, e.g.:
+  #   default: "anthropic/claude-sonnet-4"
+  provider: "auto"
+
+agent:
+  max_turns: 90
+
+skills:
+  # Keep {{template}} variable expansion on for skill bodies.
+  template_vars: true
+
+memory:
+  memory_enabled: true
+
+cron:
+  wrap_response: true
+
+# MCP servers this profile can use. Runtime reads mcp_servers from THIS file
+# (hermes_cli/mcp_config.py keeps MCP config under the mcp_servers key).
+# Both entries ship disabled — enable them after supplying credentials in
+# .env, or interactively via `hermes -p legal-person mcp`.
+mcp_servers:
+  # Example: a law-practice-management MCP server (e.g. a Clio bridge you
+  # run yourself). ${MCP_CLIO_API_KEY} is interpolated from the profile .env.
+  clio:
+    url: "https://clio-mcp.example.com/mcp"
+    headers:
+      Authorization: "Bearer ${MCP_CLIO_API_KEY}"
+    enabled: false
+  # Read-only access to a local documents folder for matter files.
+  matter-files:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-filesystem", "workspace"]
+    enabled: false

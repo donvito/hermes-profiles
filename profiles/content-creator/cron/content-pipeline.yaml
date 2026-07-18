@@ -1,0 +1,23 @@
+# Cron job template — weekday content pipeline check.
+#
+# Hermes does NOT auto-schedule cron files shipped in a distribution.
+# Review, then register with:
+#
+#   hermes -p content-creator cron create "0 9 * * 1-5" \
+#     "Do the morning content pipeline check: read workspace/content-calendar.md, list what is scheduled for today and this week, draft anything in the 'ideas' column that is due within 2 days (2-3 variants each, per the linkedin-posting and x-posting skill format rules), and list drafts awaiting approval. Do NOT publish anything — publishing requires explicit human approval." \
+#     --name "content-pipeline" --skill linkedin-posting --skill x-posting --deliver local
+#
+# Fields mirror `hermes cron create` (cron/jobs.py::create_job).
+# Note the prompt forbids publishing — scheduled runs only prepare drafts;
+# a human approves before anything goes live (see SOUL.md boundaries).
+name: content-pipeline
+schedule: "0 9 * * 1-5"        # weekdays 09:00, profile-local time
+prompt: >-
+  Do the morning content pipeline check: read workspace/content-calendar.md,
+  list what is scheduled for today and this week, draft anything in the
+  'ideas' column that is due within 2 days (2-3 variants each, per the
+  linkedin-posting and x-posting skill format rules), and list drafts
+  awaiting approval. Do NOT publish anything — publishing requires explicit
+  human approval.
+skills: [linkedin-posting, x-posting]
+deliver: local
