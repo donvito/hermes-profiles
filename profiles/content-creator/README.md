@@ -15,11 +15,23 @@ hermes profile install ./hermes-profiles/profiles/content-creator --alias -y
 hermes profile install github.com/donvito/content-creator-agent --alias
 ```
 
-Then:
+## Configure the model
+
+The profile installs with no API key (`No inference provider configured`
+until you add one). Add a key to the **profile's own** `.env` and pin a
+model:
 
 ```bash
-cp ~/.hermes/profiles/content-creator/.env.EXAMPLE ~/.hermes/profiles/content-creator/.env
-# fill in keys, or run: hermes -p content-creator setup
+# 1. Add your key to the profile .env (path differs per OS — ask hermes):
+hermes -p content-creator config env-path
+echo "OPENAI_API_KEY=sk-your-key-here" >> "$(hermes -p content-creator config env-path)"
+
+# 2. Pick provider + model interactively (e.g. OpenAI API / gpt-5.5):
+hermes -p content-creator model
+
+# 3. Smoke-test:
+hermes -p content-creator -z "Confirm you are the content-creator profile in one sentence."
+
 content-creator chat
 ```
 

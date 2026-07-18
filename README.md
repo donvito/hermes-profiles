@@ -21,6 +21,10 @@ profile root).
 Prerequisite: the Hermes CLI
 (`curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash`).
 
+In every command below, replace `<profile-name>` with the profile you're
+installing: `legal-person`, `realestate-agent`, `home-manager`, or
+`content-creator`. The concrete examples use `legal-person`.
+
 ### From this monorepo (works today)
 
 `hermes profile install <git-url>` requires `distribution.yaml` at the repo
@@ -29,9 +33,10 @@ then install from the local directory:
 
 ```bash
 git clone https://github.com/donvito/hermes-profiles
+hermes profile install ./hermes-profiles/profiles/<profile-name> --alias -y
+
+# example:
 hermes profile install ./hermes-profiles/profiles/legal-person --alias -y
-# or any other profile:
-hermes profile install ./hermes-profiles/profiles/content-creator --alias -y
 ```
 
 ### One command, from a delivery repo (after publishing)
@@ -41,20 +46,69 @@ Once a profile has been released to its standalone delivery repo with
 below), users install straight from the git URL, no clone needed:
 
 ```bash
-# works only after donvito/legal-person-agent has been published
+hermes profile install github.com/donvito/<profile-name>-agent --alias
+
+# example (works only after donvito/legal-person-agent has been published):
 hermes profile install github.com/donvito/legal-person-agent --alias
+```
+
+### Configure the model (required before first chat)
+
+Profiles ship with `model.provider: auto` and no API key — a fresh install
+fails with `No inference provider configured` until you add a key. Each
+profile has its **own** `.env`, separate from your default Hermes setup.
+
+**1. Add your API key to the profile's `.env`.** Ask hermes for the exact
+path — it differs per OS (`~/.hermes/profiles/<profile-name>/.env` on
+Linux/macOS, `%LOCALAPPDATA%\hermes\profiles\<profile-name>\.env` on
+Windows):
+
+```bash
+hermes -p <profile-name> config env-path
+# open that file (or create it) and add one line, no quotes:
+#   OPENAI_API_KEY=sk-your-key-here
+
+# one-liner alternative (bash / Git Bash), example for legal-person:
+echo "OPENAI_API_KEY=sk-your-key-here" >> "$(hermes -p legal-person config env-path)"
+```
+
+**2. Pick the provider and model** with the interactive picker:
+
+```bash
+hermes -p <profile-name> model
+
+# example:
+hermes -p legal-person model
+```
+
+Choose your provider (e.g. OpenAI API) and a model (e.g. gpt-5.5) from the
+menu — it saves into the profile's `config.yaml`. Any provider hermes
+supports works (OpenAI, OpenRouter, Anthropic, ...); the full setup wizard
+(`hermes -p <profile-name> setup`) is the alternative if you're also
+configuring other things.
+
+For scripts/automation you can set the same values non-interactively:
+
+```bash
+hermes -p <profile-name> config set model.provider openai-api
+hermes -p <profile-name> config set model.default gpt-5.5
+```
+
+**3. Smoke-test it:**
+
+```bash
+hermes -p <profile-name> -z "Reply with one sentence confirming which profile you are."
+
+# example:
+hermes -p legal-person -z "Reply with one sentence confirming you are the legal-person profile."
 ```
 
 ### After install
 
 ```bash
-cp ~/.hermes/profiles/legal-person/.env.EXAMPLE ~/.hermes/profiles/legal-person/.env
-# fill in your keys — or run the wizard:
-hermes -p legal-person setup
-
-legal-person chat            # thanks to --alias
-hermes profile info legal-person
-hermes profile update legal-person   # pull a new release later
+<profile-name> chat                    # thanks to --alias (example: legal-person chat)
+hermes profile info <profile-name>     # version, source, required env vars
+hermes profile update <profile-name>   # pull a new release later
 ```
 
 Your `.env`, memories, sessions, and `config.yaml` edits are never touched
