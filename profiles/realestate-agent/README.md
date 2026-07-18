@@ -7,9 +7,10 @@ comparable-sales analysis, and market monitoring.
 
 ```bash
 # From a checkout of this monorepo (local-directory install):
-hermes profile install ./profiles/realestate-agent --alias -y
+git clone https://github.com/donvito/hermes-profiles
+hermes profile install ./hermes-profiles/profiles/realestate-agent --alias -y
 
-# Or from the standalone delivery repo published by scripts/release.sh:
+# Or, once published to its delivery repo via scripts/release.sh:
 hermes profile install github.com/donvito/realestate-agent-agent --alias
 ```
 
