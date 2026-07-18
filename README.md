@@ -167,6 +167,9 @@ The delivery repo must be named `hermes-profile-<profile-name>` —
 `release.sh` rejects any other name, and the CI workflow derives the URL
 from the convention automatically.
 
+Full walkthrough — one-time setup (delivery repo, `DELIVERY_TOKEN`), what
+gets pushed, and versioning semantics: see [RELEASING.md](RELEASING.md).
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
