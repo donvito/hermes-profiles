@@ -21,24 +21,28 @@ profile root).
 Prerequisite: the Hermes CLI
 (`curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash`).
 
-### One command, from a delivery repo
-
-Each released profile is mirrored to its own repo (see Releasing below), so
-users install straight from a git URL:
-
-```bash
-hermes profile install github.com/donvito/legal-person-agent --alias
-```
-
-### From this monorepo
+### From this monorepo (works today)
 
 `hermes profile install <git-url>` requires `distribution.yaml` at the repo
-root, so a monorepo subdirectory can't be a git-URL source — but any local
-directory can:
+root, so a monorepo subdirectory can't be a git-URL source — clone first,
+then install from the local directory:
 
 ```bash
-git clone github.com/donvito/hermes-profiles
+git clone https://github.com/donvito/hermes-profiles
 hermes profile install ./hermes-profiles/profiles/legal-person --alias -y
+# or any other profile:
+hermes profile install ./hermes-profiles/profiles/content-creator --alias -y
+```
+
+### One command, from a delivery repo (after publishing)
+
+Once a profile has been released to its standalone delivery repo with
+`scripts/release.sh` (or the tag-triggered CI workflow — see Releasing
+below), users install straight from the git URL, no clone needed:
+
+```bash
+# works only after donvito/legal-person-agent has been published
+hermes profile install github.com/donvito/legal-person-agent --alias
 ```
 
 ### After install
