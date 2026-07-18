@@ -13,8 +13,8 @@ license: "MIT"
 # Env vars the installer checks against the user's shell + profile .env and
 # writes into the generated .env.EXAMPLE. Secrets only — never commit values.
 env_requires:
-  - name: OPENROUTER_API_KEY
-    description: "Model provider key (or run `hermes -p legal-person setup` to pick another provider)"
+  - name: OPENAI_API_KEY
+    description: "OpenAI API key for model access (or run `hermes -p legal-person setup` to pick another provider)"
     required: false
   - name: MCP_CLIO_API_KEY
     description: "Clio (law practice management) MCP bearer token — only if you enable the clio MCP server in config.yaml"

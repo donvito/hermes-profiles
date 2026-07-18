@@ -8,6 +8,6 @@ author: "hermes-profiles maintainers"
 license: "MIT"
 
 env_requires:
-  - name: OPENROUTER_API_KEY
-    description: "Model provider key (or run `hermes -p home-manager setup` to pick another provider)"
+  - name: OPENAI_API_KEY
+    description: "OpenAI API key for model access (or run `hermes -p home-manager setup` to pick another provider)"
     required: false
