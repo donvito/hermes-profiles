@@ -10,7 +10,7 @@ comparable-sales analysis, and market monitoring.
 hermes profile install ./profiles/realestate-agent --alias -y
 
 # Or from the standalone delivery repo published by scripts/release.sh:
-hermes profile install github.com/donvitocodes/realestate-agent-agent --alias
+hermes profile install github.com/donvito/realestate-agent-agent --alias
 ```
 
 Then:

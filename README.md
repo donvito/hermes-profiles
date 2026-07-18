@@ -27,7 +27,7 @@ Each released profile is mirrored to its own repo (see Releasing below), so
 users install straight from a git URL:
 
 ```bash
-hermes profile install github.com/donvitocodes/legal-person-agent --alias
+hermes profile install github.com/donvito/legal-person-agent --alias
 ```
 
 ### From this monorepo
@@ -37,7 +37,7 @@ root, so a monorepo subdirectory can't be a git-URL source — but any local
 directory can:
 
 ```bash
-git clone github.com/donvitocodes/hermes-profiles
+git clone github.com/donvito/hermes-profiles
 hermes profile install ./hermes-profiles/profiles/legal-person --alias -y
 ```
 
@@ -91,7 +91,7 @@ Bump `version` in the profile's `distribution.yaml`, update its
 
 ```bash
 # Manually:
-scripts/release.sh legal-person git@github.com:donvitocodes/legal-person-agent.git
+scripts/release.sh legal-person git@github.com:donvito/legal-person-agent.git
 
 # Or via CI (.github/workflows/release.yaml):
 git tag legal-person-v0.2.0

@@ -11,7 +11,7 @@ and X — with explicit human approval before anything goes live.
 hermes profile install ./profiles/content-creator --alias -y
 
 # Or from the standalone delivery repo published by scripts/release.sh:
-hermes profile install github.com/donvitocodes/content-creator-agent --alias
+hermes profile install github.com/donvito/content-creator-agent --alias
 ```
 
 Then:
