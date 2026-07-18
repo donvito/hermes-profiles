@@ -2,18 +2,22 @@
 # release.sh — publish one profile from this monorepo to its standalone
 # delivery repo, so users get the one-command install:
 #
-#   hermes profile install github.com/<owner>/<delivery-repo> --alias
+#   hermes profile install github.com/<owner>/hermes-profile-<name> --alias
 #
 # Why a delivery repo: `hermes profile install <git-url>` clones the URL and
 # requires distribution.yaml at the REPO ROOT (hermes_cli/profile_distribution.py
 # _stage_source). It cannot address a subdirectory of a monorepo, so each
 # profile is mirrored to its own repo where the profile IS the root.
 #
+# Naming convention (ENFORCED): the delivery repo must be named
+# hermes-profile-<profile-name>, so delivery repos group together and are
+# recognizable next to unrelated repos under the same owner.
+#
 # Usage:
 #   scripts/release.sh <profile-name> <delivery-repo-url> [--dry-run]
 #
 # Example:
-#   scripts/release.sh legal-person git@github.com:donvito/legal-person-agent.git
+#   scripts/release.sh legal-person git@github.com:donvito/hermes-profile-legal-person.git
 #
 # The version is read from the profile's distribution.yaml and pushed as tag
 # v<version> on the delivery repo. Re-releasing the same version fails unless
@@ -36,6 +40,20 @@ PROFILE_DIR="$REPO_ROOT/profiles/$PROFILE_NAME"
     echo "FAIL: $PROFILE_DIR has no distribution.yaml" >&2
     exit 1
 }
+
+# Enforce the delivery-repo naming convention: hermes-profile-<profile-name>.
+# Works for https://, git@host:owner/repo.git, ssh:// and local paths.
+REPO_BASENAME="${DELIVERY_URL%/}"
+REPO_BASENAME="${REPO_BASENAME##*/}"
+REPO_BASENAME="${REPO_BASENAME##*:}"
+REPO_BASENAME="${REPO_BASENAME%.git}"
+EXPECTED_REPO="hermes-profile-$PROFILE_NAME"
+if [[ "$REPO_BASENAME" != "$EXPECTED_REPO" ]]; then
+    echo "FAIL: delivery repo must be named '$EXPECTED_REPO' (got '$REPO_BASENAME')." >&2
+    echo "      Convention: hermes-profile-<profile-name>, e.g." >&2
+    echo "      git@github.com:<owner>/$EXPECTED_REPO.git" >&2
+    exit 1
+fi
 
 VERSION="$(python3 -c "
 import yaml, sys

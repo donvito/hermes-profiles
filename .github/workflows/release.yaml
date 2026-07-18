@@ -2,17 +2,20 @@
 # pushed to this monorepo.
 #
 #   git tag legal-person-v0.1.0 && git push origin legal-person-v0.1.0
-#     -> pushes profiles/legal-person/ to github.com/<owner>/legal-person-agent
-#        as tag v0.1.0
+#     -> pushes profiles/legal-person/ to
+#        github.com/<owner>/hermes-profile-legal-person as tag v0.1.0
 #
 # Conventions:
 #   * Tag format:      <profile-name>-v<semver>   (profile dir must exist)
-#   * Delivery repo:   <same owner>/<profile-name>-agent
+#   * Delivery repo:   <same owner>/hermes-profile-<profile-name>
+#                      (also enforced by scripts/release.sh, so delivery
+#                      repos group together and are recognizable next to
+#                      unrelated repos under the same owner)
 #   * Auth:            repository secret DELIVERY_TOKEN — a fine-grained PAT
 #                      with contents:write on the delivery repos.
 #
 # The delivery repo is what makes the one-command install work:
-#   hermes profile install github.com/<owner>/<profile-name>-agent --alias
+#   hermes profile install github.com/<owner>/hermes-profile-<profile-name> --alias
 # (`hermes profile install` requires distribution.yaml at the repo root, so
 # monorepo subdirectories cannot be installed from a git URL directly.)
 
@@ -78,4 +81,4 @@ jobs:
           git config --global user.email "actions@users.noreply.github.com"
           scripts/release.sh \
             "${{ steps.tag.outputs.profile }}" \
-            "https://x-access-token:${DELIVERY_TOKEN}@github.com/${GITHUB_REPOSITORY_OWNER}/${{ steps.tag.outputs.profile }}-agent.git"
+            "https://x-access-token:${DELIVERY_TOKEN}@github.com/${GITHUB_REPOSITORY_OWNER}/hermes-profile-${{ steps.tag.outputs.profile }}.git"
