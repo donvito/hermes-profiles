@@ -1,0 +1,20 @@
+# Hermes config for the content-creator profile.
+# Non-secret settings only — tokens live in the profile .env
+# (LINKEDIN_ACCESS_TOKEN, X_BEARER_TOKEN, model key).
+# Preserved on `hermes profile update` (pass --force-config to reset).
+
+model:
+  provider: "auto"
+
+agent:
+  max_turns: 90
+
+skills:
+  template_vars: true
+
+memory:
+  # Voice, audience, and recurring themes are remembered across sessions.
+  memory_enabled: true
+
+cron:
+  wrap_response: true

@@ -11,6 +11,7 @@ which versions are supported. File references are paths in
 | legal-person | 0.1.0 | >=0.18.0 | hermes-agent 0.18.2 |
 | realestate-agent | 0.1.0 | >=0.18.0 | hermes-agent 0.18.2 |
 | home-manager | 0.1.0 | >=0.18.0 | hermes-agent 0.18.2 |
+| content-creator | 0.1.0 | >=0.18.0 | hermes-agent 0.18.2 |
 
 The pin lives in each profile's `distribution.yaml` as `hermes_requires`
 (single comparator, checked at install time by

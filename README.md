@@ -14,6 +14,7 @@ profile root).
 | [`legal-person`](profiles/legal-person/) | Legal assistant: contract review, case summaries, deadline tracking |
 | [`realestate-agent`](profiles/realestate-agent/) | Real-estate assistant: listings, comps, market watch |
 | [`home-manager`](profiles/home-manager/) | Household assistant: meal planning, maintenance, reminders |
+| [`content-creator`](profiles/content-creator/) | Content assistant: drafts, content calendar, LinkedIn + X posting |
 
 ## Install a profile
 
