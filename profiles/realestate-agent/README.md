@@ -25,9 +25,8 @@ model:
 hermes -p realestate-agent config env-path
 echo "OPENAI_API_KEY=sk-your-key-here" >> "$(hermes -p realestate-agent config env-path)"
 
-# 2. Pin provider + model (or run: hermes -p realestate-agent model):
-hermes -p realestate-agent config set model.provider openai-api
-hermes -p realestate-agent config set model.default gpt-5.5
+# 2. Pick provider + model interactively (e.g. OpenAI API / gpt-5.5):
+hermes -p realestate-agent model
 
 # 3. Smoke-test:
 hermes -p realestate-agent -z "Confirm you are the realestate-agent profile in one sentence."

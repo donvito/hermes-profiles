@@ -25,9 +25,8 @@ model:
 hermes -p home-manager config env-path
 echo "OPENAI_API_KEY=sk-your-key-here" >> "$(hermes -p home-manager config env-path)"
 
-# 2. Pin provider + model (or run: hermes -p home-manager model):
-hermes -p home-manager config set model.provider openai-api
-hermes -p home-manager config set model.default gpt-5.5
+# 2. Pick provider + model interactively (e.g. OpenAI API / gpt-5.5):
+hermes -p home-manager model
 
 # 3. Smoke-test:
 hermes -p home-manager -z "Confirm you are the home-manager profile in one sentence."

@@ -25,9 +25,8 @@ model:
 hermes -p legal-person config env-path
 echo "OPENAI_API_KEY=sk-your-key-here" >> "$(hermes -p legal-person config env-path)"
 
-# 2. Pin provider + model (or run: hermes -p legal-person model):
-hermes -p legal-person config set model.provider openai-api
-hermes -p legal-person config set model.default gpt-5.5
+# 2. Pick provider + model interactively (e.g. OpenAI API / gpt-5.5):
+hermes -p legal-person model
 
 # 3. Smoke-test:
 hermes -p legal-person -z "Confirm you are the legal-person profile in one sentence."

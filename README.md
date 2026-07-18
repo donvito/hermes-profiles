@@ -64,17 +64,24 @@ hermes -p legal-person config env-path
 echo "OPENAI_API_KEY=sk-your-key-here" >> "$(hermes -p legal-person config env-path)"
 ```
 
-**2. Pin the provider and model** (recommended — skips auto-detection):
+**2. Pick the provider and model** with the interactive picker:
+
+```bash
+hermes -p legal-person model
+```
+
+Choose your provider (e.g. OpenAI API) and a model (e.g. gpt-5.5) from the
+menu — it saves into the profile's `config.yaml`. Any provider hermes
+supports works (OpenAI, OpenRouter, Anthropic, ...); the full setup wizard
+(`hermes -p legal-person setup`) is the alternative if you're also
+configuring other things.
+
+For scripts/automation you can set the same values non-interactively:
 
 ```bash
 hermes -p legal-person config set model.provider openai-api
 hermes -p legal-person config set model.default gpt-5.5
 ```
-
-Or pick interactively with `hermes -p legal-person model`, or run the full
-wizard with `hermes -p legal-person setup`. Any provider hermes supports
-works the same way (e.g. `OPENROUTER_API_KEY` + provider `openrouter`,
-`ANTHROPIC_API_KEY` + provider `anthropic`).
 
 **3. Smoke-test it:**
 
