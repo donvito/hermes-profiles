@@ -11,7 +11,7 @@ git clone https://github.com/donvito/hermes-profiles
 hermes profile install ./hermes-profiles/profiles/realestate-agent --alias -y
 
 # Or, once published to its delivery repo via scripts/release.sh:
-hermes profile install github.com/donvito/realestate-agent-agent --alias
+hermes profile install github.com/donvito/hermes-profile-realestate-agent --alias
 ```
 
 ## Configure the model

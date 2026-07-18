@@ -49,7 +49,8 @@ The pin lives in each profile's `distribution.yaml` as `hermes_requires`
   subdirectories therefore install via the local-directory path
   (`hermes profile install ./profiles/<name>`) or via the per-profile
   delivery repos produced by `scripts/release.sh` /
-  `.github/workflows/release.yaml`.
+  `.github/workflows/release.yaml` (named `hermes-profile-<name>` by
+  convention, enforced by the release tooling).
 - Git-ref pinning (`#v1.2.0` suffixes) is documented as planned upstream but
   not implemented — installs track the delivery repo's default branch, which
   is why `release.sh` only fast-forwards the delivery repo at tagged,

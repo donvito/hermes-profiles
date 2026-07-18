@@ -12,7 +12,7 @@ git clone https://github.com/donvito/hermes-profiles
 hermes profile install ./hermes-profiles/profiles/content-creator --alias -y
 
 # Or, once published to its delivery repo via scripts/release.sh:
-hermes profile install github.com/donvito/content-creator-agent --alias
+hermes profile install github.com/donvito/hermes-profile-content-creator --alias
 ```
 
 ## Configure the model

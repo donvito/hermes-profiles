@@ -11,7 +11,7 @@ git clone https://github.com/donvito/hermes-profiles
 hermes profile install ./hermes-profiles/profiles/legal-person --alias -y
 
 # Or, once published to its delivery repo via scripts/release.sh:
-hermes profile install github.com/donvito/legal-person-agent --alias
+hermes profile install github.com/donvito/hermes-profile-legal-person --alias
 ```
 
 ## Configure the model

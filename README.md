@@ -43,13 +43,16 @@ hermes profile install ./hermes-profiles/profiles/legal-person --alias -y
 
 Once a profile has been released to its standalone delivery repo with
 `scripts/release.sh` (or the tag-triggered CI workflow — see Releasing
-below), users install straight from the git URL, no clone needed:
+below), users install straight from the git URL, no clone needed.
+Delivery repos follow the naming convention `hermes-profile-<profile-name>`
+(enforced by the release tooling), so they group together and are
+recognizable next to unrelated repos under the same owner:
 
 ```bash
-hermes profile install github.com/donvito/<profile-name>-agent --alias
+hermes profile install github.com/donvito/hermes-profile-<profile-name> --alias
 
-# example (works only after donvito/legal-person-agent has been published):
-hermes profile install github.com/donvito/legal-person-agent --alias
+# example (works only after donvito/hermes-profile-legal-person has been published):
+hermes profile install github.com/donvito/hermes-profile-legal-person --alias
 ```
 
 ### Configure the model (required before first chat)
@@ -149,7 +152,7 @@ Bump `version` in the profile's `distribution.yaml`, update its
 
 ```bash
 # Manually:
-scripts/release.sh legal-person git@github.com:donvito/legal-person-agent.git
+scripts/release.sh legal-person git@github.com:donvito/hermes-profile-legal-person.git
 
 # Or via CI (.github/workflows/release.yaml):
 git tag legal-person-v0.2.0
@@ -159,6 +162,10 @@ git push origin legal-person-v0.2.0
 Both copy `profiles/legal-person/` to the root of the delivery repo and tag
 it `v0.2.0`. Installed users pick it up with
 `hermes profile update legal-person`.
+
+The delivery repo must be named `hermes-profile-<profile-name>` —
+`release.sh` rejects any other name, and the CI workflow derives the URL
+from the convention automatically.
 
 ## License
 

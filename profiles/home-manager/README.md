@@ -11,7 +11,7 @@ git clone https://github.com/donvito/hermes-profiles
 hermes profile install ./hermes-profiles/profiles/home-manager --alias -y
 
 # Or, once published to its delivery repo via scripts/release.sh:
-hermes profile install github.com/donvito/home-manager-agent --alias
+hermes profile install github.com/donvito/hermes-profile-home-manager --alias
 ```
 
 ## Configure the model
