@@ -10,7 +10,7 @@ home maintenance, and reminders.
 hermes profile install ./profiles/home-manager --alias -y
 
 # Or from the standalone delivery repo published by scripts/release.sh:
-hermes profile install github.com/donvitocodes/home-manager-agent --alias
+hermes profile install github.com/donvito/home-manager-agent --alias
 ```
 
 Then:

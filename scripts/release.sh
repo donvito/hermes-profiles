@@ -13,7 +13,7 @@
 #   scripts/release.sh <profile-name> <delivery-repo-url> [--dry-run]
 #
 # Example:
-#   scripts/release.sh legal-person git@github.com:donvitocodes/legal-person-agent.git
+#   scripts/release.sh legal-person git@github.com:donvito/legal-person-agent.git
 #
 # The version is read from the profile's distribution.yaml and pushed as tag
 # v<version> on the delivery repo. Re-releasing the same version fails unless
