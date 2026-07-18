@@ -47,3 +47,7 @@ hermes -p home-manager cron create "0 17 * * 0" \
 ```bash
 hermes profile update home-manager
 ```
+
+Config tweaks, memories, sessions, and `.env` are preserved; SOUL, skills,
+and the cron directory are replaced. Re-register cron jobs after updating
+(`hermes -p home-manager cron list` to check).

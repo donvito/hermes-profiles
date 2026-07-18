@@ -59,4 +59,7 @@ hermes profile update legal-person
 ```
 
 Your `config.yaml` tweaks, memories, sessions, and `.env` are preserved;
-SOUL, skills, and cron templates are replaced from the new version.
+SOUL, skills, and the cron directory are replaced from the new version.
+Note: replacing `cron/` also clears jobs you registered with `cron create`,
+so re-register them after an update (`hermes -p legal-person cron list` to
+check).

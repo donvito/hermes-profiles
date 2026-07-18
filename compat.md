@@ -59,6 +59,11 @@ The pin lives in each profile's `distribution.yaml` as `hermes_requires`
   `state.db*`, `logs/`, `workspace/`, `home/`, `local/`, caches) are never
   touched and are hard-stripped by the installer even if accidentally
   committed.
+- **Cron caveat (verified against 0.18.2):** because `cron/` is
+  distribution-owned, `hermes profile update` replaces the whole directory —
+  including `cron/jobs.json`, where jobs you registered with
+  `hermes cron create` live. After an update, re-register jobs from the
+  shipped templates (`hermes -p <name> cron list` to confirm what's gone).
 - Profile names must match `[a-z0-9][a-z0-9_-]{0,63}` and must not collide
   with reserved names (`hermes`, `default`, `test`, `tmp`, `root`, `sudo`)
   or hermes subcommands — all three directory names here comply.

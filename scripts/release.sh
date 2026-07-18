@@ -52,7 +52,8 @@ trap 'rm -rf "$WORKDIR"' EXIT
 
 # Clone the delivery repo (or start fresh if it's empty/new).
 if git clone --depth 1 "$DELIVERY_URL" "$WORKDIR/repo" 2>/dev/null; then
-    DEFAULT_BRANCH="$(git -C "$WORKDIR/repo" rev-parse --abbrev-ref HEAD)"
+    # symbolic-ref (not rev-parse) so a freshly-created empty repo works too.
+    DEFAULT_BRANCH="$(git -C "$WORKDIR/repo" symbolic-ref --short HEAD)"
 else
     mkdir -p "$WORKDIR/repo"
     git -C "$WORKDIR/repo" init -b main

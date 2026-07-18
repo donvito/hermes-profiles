@@ -47,3 +47,7 @@ hermes -p realestate-agent cron create "0 8 * * 1-5" \
 ```bash
 hermes profile update realestate-agent
 ```
+
+Config tweaks, memories, sessions, and `.env` are preserved; SOUL, skills,
+and the cron directory are replaced. Re-register cron jobs after updating
+(`hermes -p realestate-agent cron list` to check).
