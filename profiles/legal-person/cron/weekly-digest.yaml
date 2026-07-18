@@ -1,0 +1,21 @@
+# Cron job template — weekly matter digest.
+#
+# Hermes does NOT auto-schedule cron files shipped in a distribution (the
+# installer copies cron/ but the scheduler only reads cron/jobs.json, which
+# is created when jobs are registered). This is a deliberate safety choice:
+# review the job, then register it yourself:
+#
+#   hermes -p legal-person cron create "0 9 * * 1" \
+#     "Produce the weekly matter digest as described by the case-summary skill: scan the workspace for documents added or changed in the last 7 days, summarize each, and list upcoming deadlines for the next 30 days." \
+#     --name "weekly-digest" --skill case-summary --deliver local
+#
+# Fields below mirror the arguments of `hermes cron create`
+# (cron/jobs.py::create_job in hermes-agent).
+name: weekly-digest
+schedule: "0 9 * * 1"          # Mondays 09:00, profile-local time
+prompt: >-
+  Produce the weekly matter digest as described by the case-summary skill:
+  scan the workspace for documents added or changed in the last 7 days,
+  summarize each, and list upcoming deadlines for the next 30 days.
+skills: [case-summary]
+deliver: local                  # or telegram / discord / "all" once a gateway is set up

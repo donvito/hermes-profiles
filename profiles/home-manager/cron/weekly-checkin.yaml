@@ -1,0 +1,18 @@
+# Cron job template — Sunday household check-in.
+#
+# Hermes does NOT auto-schedule cron files shipped in a distribution.
+# Review, then register with:
+#
+#   hermes -p home-manager cron create "0 17 * * 0" \
+#     "Run the Sunday household check-in: draft this week's meal plan per the meal-planner skill, and list any maintenance items due in the next two weeks per the home-maintenance skill." \
+#     --name "weekly-checkin" --skill meal-planner --skill home-maintenance --deliver local
+#
+# Fields mirror `hermes cron create` (cron/jobs.py::create_job).
+name: weekly-checkin
+schedule: "0 17 * * 0"         # Sundays 17:00, profile-local time
+prompt: >-
+  Run the Sunday household check-in: draft this week's meal plan per the
+  meal-planner skill, and list any maintenance items due in the next two
+  weeks per the home-maintenance skill.
+skills: [meal-planner, home-maintenance]
+deliver: local

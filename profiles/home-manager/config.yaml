@@ -1,0 +1,19 @@
+# Hermes config for the home-manager profile.
+# Non-secret settings only — keys live in the profile .env.
+# Preserved on `hermes profile update` (pass --force-config to reset).
+
+model:
+  provider: "auto"
+
+agent:
+  max_turns: 90
+
+skills:
+  template_vars: true
+
+memory:
+  # Household facts (diets, appliance models, providers) live in memory.
+  memory_enabled: true
+
+cron:
+  wrap_response: true

@@ -1,0 +1,21 @@
+# Hermes profile distribution manifest.
+# Schema: hermes_cli/profile_distribution.py (DistributionManifest) in hermes-agent.
+# `name` is the only required field; everything else has sensible defaults.
+name: legal-person
+version: 0.1.0
+description: "Legal assistant — contract review, case summaries, deadline tracking"
+# Hermes version this profile is pinned against (single comparator, checked
+# against hermes_cli.__version__ at install time).
+hermes_requires: ">=0.18.0"
+author: "hermes-profiles maintainers"
+license: "MIT"
+
+# Env vars the installer checks against the user's shell + profile .env and
+# writes into the generated .env.EXAMPLE. Secrets only — never commit values.
+env_requires:
+  - name: OPENROUTER_API_KEY
+    description: "Model provider key (or run `hermes -p legal-person setup` to pick another provider)"
+    required: false
+  - name: MCP_CLIO_API_KEY
+    description: "Clio (law practice management) MCP bearer token — only if you enable the clio MCP server in config.yaml"
+    required: false

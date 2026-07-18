@@ -1,0 +1,17 @@
+# Cron job template — weekday market watch.
+#
+# Hermes does NOT auto-schedule cron files shipped in a distribution.
+# Review, then register with:
+#
+#   hermes -p realestate-agent cron create "0 8 * * 1-5" \
+#     "Do a morning market watch: check mortgage-rate headlines and any new or price-changed listings in my saved search areas noted in memory. Summarize in five bullets max; skip the report entirely if nothing changed." \
+#     --name "market-watch" --deliver local
+#
+# Fields mirror `hermes cron create` (cron/jobs.py::create_job).
+name: market-watch
+schedule: "0 8 * * 1-5"        # weekdays 08:00, profile-local time
+prompt: >-
+  Do a morning market watch: check mortgage-rate headlines and any new or
+  price-changed listings in my saved search areas noted in memory. Summarize
+  in five bullets max; skip the report entirely if nothing changed.
+deliver: local

@@ -1,0 +1,81 @@
+# Release a profile to its standalone delivery repo when a matching tag is
+# pushed to this monorepo.
+#
+#   git tag legal-person-v0.1.0 && git push origin legal-person-v0.1.0
+#     -> pushes profiles/legal-person/ to github.com/<owner>/legal-person-agent
+#        as tag v0.1.0
+#
+# Conventions:
+#   * Tag format:      <profile-name>-v<semver>   (profile dir must exist)
+#   * Delivery repo:   <same owner>/<profile-name>-agent
+#   * Auth:            repository secret DELIVERY_TOKEN — a fine-grained PAT
+#                      with contents:write on the delivery repos.
+#
+# The delivery repo is what makes the one-command install work:
+#   hermes profile install github.com/<owner>/<profile-name>-agent --alias
+# (`hermes profile install` requires distribution.yaml at the repo root, so
+# monorepo subdirectories cannot be installed from a git URL directly.)
+
+name: release
+
+on:
+  push:
+    tags:
+      - "*-v*"
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout monorepo
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Parse tag
+        id: tag
+        run: |
+          TAG="${GITHUB_REF_NAME}"                 # e.g. legal-person-v0.1.0
+          PROFILE="${TAG%-v*}"                     # legal-person
+          VERSION="${TAG##*-v}"                    # 0.1.0
+          if [[ ! -d "profiles/$PROFILE" ]]; then
+            echo "Tag $TAG does not match a directory under profiles/" >&2
+            exit 1
+          fi
+          MANIFEST_VERSION="$(python3 -c "import yaml; print(yaml.safe_load(open('profiles/$PROFILE/distribution.yaml')).get('version','0.1.0'))")"
+          if [[ "$MANIFEST_VERSION" != "$VERSION" ]]; then
+            echo "Tag version $VERSION != distribution.yaml version $MANIFEST_VERSION" >&2
+            exit 1
+          fi
+          echo "profile=$PROFILE" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Validate profile (static checks only — hermes not installed in CI)
+        run: |
+          python3 - "profiles/${{ steps.tag.outputs.profile }}" <<'PY'
+          import sys, pathlib, yaml
+          root = pathlib.Path(sys.argv[1])
+          mf = yaml.safe_load((root / "distribution.yaml").read_text())
+          assert mf.get("name") == root.name
+          for md in sorted(root.glob("skills/*/SKILL.md")):
+              fm = yaml.safe_load(md.read_text().split("---", 2)[1])
+              assert fm.get("name") and fm.get("description"), md
+          for p in (".env", "auth.json", "state.db", "memories", "sessions", "logs"):
+              assert not (root / p).exists(), f"user-owned path staged: {p}"
+          print("static checks passed")
+          PY
+
+      - name: Push to delivery repo
+        env:
+          DELIVERY_TOKEN: ${{ secrets.DELIVERY_TOKEN }}
+        run: |
+          if [[ -z "$DELIVERY_TOKEN" ]]; then
+            echo "DELIVERY_TOKEN secret is not configured" >&2
+            exit 1
+          fi
+          git config --global user.name "hermes-profiles release bot"
+          git config --global user.email "actions@users.noreply.github.com"
+          scripts/release.sh \
+            "${{ steps.tag.outputs.profile }}" \
+            "https://x-access-token:${DELIVERY_TOKEN}@github.com/${GITHUB_REPOSITORY_OWNER}/${{ steps.tag.outputs.profile }}-agent.git"
