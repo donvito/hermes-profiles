@@ -14,12 +14,23 @@ hermes profile install ./hermes-profiles/profiles/legal-person --alias -y
 hermes profile install github.com/donvito/legal-person-agent --alias
 ```
 
-Then:
+## Configure the model
+
+The profile installs with no API key (`No inference provider configured`
+until you add one). Add a key to the **profile's own** `.env` and pin a
+model:
 
 ```bash
-cp ~/.hermes/profiles/legal-person/.env.EXAMPLE ~/.hermes/profiles/legal-person/.env
-# fill in your keys, or just run:
-hermes -p legal-person setup
+# 1. Add your key to the profile .env (path differs per OS — ask hermes):
+hermes -p legal-person config env-path
+echo "OPENAI_API_KEY=sk-your-key-here" >> "$(hermes -p legal-person config env-path)"
+
+# 2. Pin provider + model (or run: hermes -p legal-person model):
+hermes -p legal-person config set model.provider openai-api
+hermes -p legal-person config set model.default gpt-5.5
+
+# 3. Smoke-test:
+hermes -p legal-person -z "Confirm you are the legal-person profile in one sentence."
 
 legal-person chat        # with --alias, or: hermes -p legal-person chat
 ```

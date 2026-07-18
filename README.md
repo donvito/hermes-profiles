@@ -45,13 +45,46 @@ below), users install straight from the git URL, no clone needed:
 hermes profile install github.com/donvito/legal-person-agent --alias
 ```
 
+### Configure the model (required before first chat)
+
+Profiles ship with `model.provider: auto` and no API key — a fresh install
+fails with `No inference provider configured` until you add a key. Each
+profile has its **own** `.env`, separate from your default Hermes setup.
+
+**1. Add your API key to the profile's `.env`.** Ask hermes for the exact
+path — it differs per OS (`~/.hermes/profiles/<name>/.env` on Linux/macOS,
+`%LOCALAPPDATA%\hermes\profiles\<name>\.env` on Windows):
+
+```bash
+hermes -p legal-person config env-path
+# open that file (or create it) and add one line, no quotes:
+#   OPENAI_API_KEY=sk-your-key-here
+
+# one-liner alternative (bash / Git Bash):
+echo "OPENAI_API_KEY=sk-your-key-here" >> "$(hermes -p legal-person config env-path)"
+```
+
+**2. Pin the provider and model** (recommended — skips auto-detection):
+
+```bash
+hermes -p legal-person config set model.provider openai-api
+hermes -p legal-person config set model.default gpt-5.5
+```
+
+Or pick interactively with `hermes -p legal-person model`, or run the full
+wizard with `hermes -p legal-person setup`. Any provider hermes supports
+works the same way (e.g. `OPENROUTER_API_KEY` + provider `openrouter`,
+`ANTHROPIC_API_KEY` + provider `anthropic`).
+
+**3. Smoke-test it:**
+
+```bash
+hermes -p legal-person -z "Reply with one sentence confirming you are the legal-person profile."
+```
+
 ### After install
 
 ```bash
-cp ~/.hermes/profiles/legal-person/.env.EXAMPLE ~/.hermes/profiles/legal-person/.env
-# fill in your keys — or run the wizard:
-hermes -p legal-person setup
-
 legal-person chat            # thanks to --alias
 hermes profile info legal-person
 hermes profile update legal-person   # pull a new release later

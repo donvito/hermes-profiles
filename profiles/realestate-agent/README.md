@@ -14,11 +14,24 @@ hermes profile install ./hermes-profiles/profiles/realestate-agent --alias -y
 hermes profile install github.com/donvito/realestate-agent-agent --alias
 ```
 
-Then:
+## Configure the model
+
+The profile installs with no API key (`No inference provider configured`
+until you add one). Add a key to the **profile's own** `.env` and pin a
+model:
 
 ```bash
-cp ~/.hermes/profiles/realestate-agent/.env.EXAMPLE ~/.hermes/profiles/realestate-agent/.env
-# fill in keys, or run: hermes -p realestate-agent setup
+# 1. Add your key to the profile .env (path differs per OS — ask hermes):
+hermes -p realestate-agent config env-path
+echo "OPENAI_API_KEY=sk-your-key-here" >> "$(hermes -p realestate-agent config env-path)"
+
+# 2. Pin provider + model (or run: hermes -p realestate-agent model):
+hermes -p realestate-agent config set model.provider openai-api
+hermes -p realestate-agent config set model.default gpt-5.5
+
+# 3. Smoke-test:
+hermes -p realestate-agent -z "Confirm you are the realestate-agent profile in one sentence."
+
 realestate-agent chat
 ```
 
