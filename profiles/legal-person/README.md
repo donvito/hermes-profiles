@@ -10,7 +10,7 @@ summaries, legal research, and deadline tracking.
 hermes profile install ./profiles/legal-person --alias -y
 
 # Or from the standalone delivery repo published by scripts/release.sh:
-hermes profile install github.com/donvitocodes/legal-person-agent --alias
+hermes profile install github.com/donvito/legal-person-agent --alias
 ```
 
 Then:
