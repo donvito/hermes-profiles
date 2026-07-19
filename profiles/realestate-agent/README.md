@@ -45,6 +45,26 @@ realestate-agent chat
 | `skills/comp-analysis/` | CMA-style pricing with explicit adjustments |
 | `cron/market-watch.yaml` | Template for a weekday-morning market brief |
 
+## Default skills
+
+`listing-writer` and `comp-analysis` are this profile's default skills:
+`SOUL.md` instructs the agent to load the relevant one (via the `skill_view`
+tool) before its first substantive answer, so listings and pricing work
+follows the skills' procedures without any flags.
+
+To preload them deterministically at launch instead, pass `-s`:
+
+```bash
+hermes -p realestate-agent -s listing-writer,comp-analysis chat
+```
+
+Tip: wrap that in your own shell alias (the `--alias` wrapper runs plain
+`hermes -p realestate-agent`):
+
+```bash
+alias realtor='hermes -p realestate-agent -s listing-writer,comp-analysis'
+```
+
 ## Cron
 
 Register the market watch after reviewing the template:

@@ -10,13 +10,6 @@ agent:
 
 skills:
   template_vars: true
-  # Default preloaded skills: loaded into every new session as if launched
-  # with `hermes -s <skill>` (requires hermes-agent with skills.preload
-  # support; older versions ignore this key). Explicit -s flags stack on
-  # top; --ignore-rules skips these.
-  preload:
-    - comp-analysis
-    - listing-writer
 
 memory:
   memory_enabled: true

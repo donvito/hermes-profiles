@@ -2,10 +2,11 @@
 
 ## 0.1.1
 
-- Declare default preloaded skills (`skills.preload` in `config.yaml`):
-  `linkedin-posting`, `x-posting` load into every new session
-  automatically on hermes-agent versions with `skills.preload` support
-  (older versions ignore the key).
+- Default skills: SOUL.md now instructs the agent to load
+  `linkedin-posting` / `x-posting` (via `skill_view`) before drafting or
+  publishing for a platform, so new sessions follow the skills' format and
+  publishing rules with no flags. README documents the deterministic launch
+  alternative (`hermes -p content-creator -s linkedin-posting,x-posting`).
 
 ## 0.1.0
 

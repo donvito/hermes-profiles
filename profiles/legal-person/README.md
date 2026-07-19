@@ -45,6 +45,26 @@ legal-person chat        # with --alias, or: hermes -p legal-person chat
 | `skills/case-summary/` | IRAC-style summaries with pin cites |
 | `cron/weekly-digest.yaml` | Template for a Monday-morning matter digest |
 
+## Default skills
+
+`contract-review` and `case-summary` are this profile's default skills:
+`SOUL.md` instructs the agent to load the relevant one (via the `skill_view`
+tool) before its first substantive answer, so contract and case work follows
+the skills' procedures without any flags.
+
+To preload them deterministically at launch instead, pass `-s`:
+
+```bash
+hermes -p legal-person -s contract-review,case-summary chat
+```
+
+Tip: wrap that in your own shell alias (the `--alias` wrapper runs plain
+`hermes -p legal-person`):
+
+```bash
+alias legal='hermes -p legal-person -s contract-review,case-summary'
+```
+
 ## Cron
 
 Shipped cron files are templates — Hermes never auto-schedules jobs from a

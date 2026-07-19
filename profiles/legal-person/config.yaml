@@ -19,13 +19,6 @@ agent:
 skills:
   # Keep {{template}} variable expansion on for skill bodies.
   template_vars: true
-  # Default preloaded skills: loaded into every new session as if launched
-  # with `hermes -s <skill>` (requires hermes-agent with skills.preload
-  # support; older versions ignore this key). Explicit -s flags stack on
-  # top; --ignore-rules skips these.
-  preload:
-    - contract-review
-    - case-summary
 
 memory:
   memory_enabled: true

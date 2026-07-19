@@ -2,10 +2,11 @@
 
 ## 0.1.1
 
-- Declare default preloaded skills (`skills.preload` in `config.yaml`):
-  `comp-analysis`, `listing-writer` load into every new session
-  automatically on hermes-agent versions with `skills.preload` support
-  (older versions ignore the key).
+- Default skills: SOUL.md now instructs the agent to load
+  `listing-writer` / `comp-analysis` (via `skill_view`) before its first
+  substantive answer, so new sessions follow the skills' procedures with
+  no flags. README documents the deterministic launch alternative
+  (`hermes -p realestate-agent -s listing-writer,comp-analysis`).
 
 ## 0.1.0
 
