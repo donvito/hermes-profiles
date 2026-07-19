@@ -1,7 +1,7 @@
 # Hermes profile distribution manifest.
 # Schema: hermes_cli/profile_distribution.py (DistributionManifest) in hermes-agent.
 name: home-manager
-version: 0.1.0
+version: 0.1.1
 description: "Household assistant — meal planning, maintenance, and reminders"
 hermes_requires: ">=0.18.0"
 author: "hermes-profiles maintainers"
