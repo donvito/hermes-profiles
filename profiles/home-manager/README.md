@@ -40,9 +40,9 @@ home-manager chat
 |---|---|
 | `distribution.yaml` | Manifest: name, version, `hermes_requires`, env vars |
 | `SOUL.md` | Identity: low-mental-load, budget-aware, safety-first |
-| `config.yaml` | Model/provider defaults; memory enabled for household facts |
-| `skills/meal-planner/` | Weekly dinners + one consolidated grocery list |
-| `skills/home-maintenance/` | Seasonal checklists and DIY-vs-pro triage |
+| `config.yaml` | Model/provider defaults, `skills.defaults` preload list; memory for household facts |
+| `skills/meal-planner/` | Weekly dinners + one consolidated grocery list (preloaded) |
+| `skills/home-maintenance/` | Seasonal checklists and DIY-vs-pro triage (preloaded) |
 | `cron/weekly-checkin.yaml` | Template for a Sunday planning check-in |
 
 ## Cron

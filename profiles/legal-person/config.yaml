@@ -19,6 +19,11 @@ agent:
 skills:
   # Keep {{template}} variable expansion on for skill bodies.
   template_vars: true
+  # Preload role skills on every new session (CLI / TUI / gateway / cron).
+  # Requires hermes-agent support for skills.defaults (see upstream #52773).
+  defaults:
+    - contract-review
+    - case-summary
 
 memory:
   memory_enabled: true

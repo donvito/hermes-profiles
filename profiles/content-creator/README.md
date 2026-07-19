@@ -41,9 +41,9 @@ content-creator chat
 |---|---|
 | `distribution.yaml` | Manifest: name, version, `hermes_requires`, env vars |
 | `SOUL.md` | Identity: platform-native writing, approval-gated publishing |
-| `config.yaml` | Model/provider defaults; memory for voice + audience |
-| `skills/linkedin-posting/` | Draft + publish via LinkedIn REST API (`/rest/posts`) |
-| `skills/x-posting/` | Draft + publish posts/threads via X API v2 (`/2/tweets`) |
+| `config.yaml` | Model/provider defaults, `skills.defaults` preload list; memory for voice + audience |
+| `skills/linkedin-posting/` | Draft + publish via LinkedIn REST API (`/rest/posts`) (preloaded) |
+| `skills/x-posting/` | Draft + publish posts/threads via X API v2 (`/2/tweets`) (preloaded) |
 | `cron/content-pipeline.yaml` | Template for a weekday-morning pipeline check (drafts only) |
 
 ## Credentials for posting

@@ -40,9 +40,9 @@ legal-person chat        # with --alias, or: hermes -p legal-person chat
 |---|---|
 | `distribution.yaml` | Manifest: name, version, `hermes_requires`, env vars |
 | `SOUL.md` | Identity: precise, citation-driven, never gives legal advice |
-| `config.yaml` | Model/provider defaults + disabled example MCP servers |
-| `skills/contract-review/` | Risk-graded clause table + redlines |
-| `skills/case-summary/` | IRAC-style summaries with pin cites |
+| `config.yaml` | Model/provider defaults, `skills.defaults` preload list, disabled example MCP servers |
+| `skills/contract-review/` | Risk-graded clause table + redlines (preloaded via `skills.defaults`) |
+| `skills/case-summary/` | IRAC-style summaries with pin cites (preloaded via `skills.defaults`) |
 | `cron/weekly-digest.yaml` | Template for a Monday-morning matter digest |
 
 ## Cron

@@ -10,6 +10,11 @@ agent:
 
 skills:
   template_vars: true
+  # Preload role skills on every new session (CLI / TUI / gateway / cron).
+  # Requires hermes-agent support for skills.defaults (see upstream #52773).
+  defaults:
+    - meal-planner
+    - home-maintenance
 
 memory:
   # Household facts (diets, appliance models, providers) live in memory.
