@@ -45,6 +45,26 @@ home-manager chat
 | `skills/home-maintenance/` | Seasonal checklists and DIY-vs-pro triage |
 | `cron/weekly-checkin.yaml` | Template for a Sunday planning check-in |
 
+## Default skills
+
+`meal-planner` and `home-maintenance` are this profile's default skills:
+`SOUL.md` instructs the agent to load the relevant one (via the `skill_view`
+tool) before its first substantive answer, so meal and maintenance work
+follows the skills' procedures without any flags.
+
+To preload them deterministically at launch instead, pass `-s`:
+
+```bash
+hermes -p home-manager -s meal-planner,home-maintenance chat
+```
+
+Tip: wrap that in your own shell alias (the `--alias` wrapper runs plain
+`hermes -p home-manager`):
+
+```bash
+alias home='hermes -p home-manager -s meal-planner,home-maintenance'
+```
+
 ## Cron
 
 Register the check-in after reviewing the template:

@@ -2,7 +2,7 @@
 # Schema: hermes_cli/profile_distribution.py (DistributionManifest) in hermes-agent.
 # `name` is the only required field; everything else has sensible defaults.
 name: legal-person
-version: 0.1.0
+version: 0.1.1
 description: "Legal assistant — contract review, case summaries, deadline tracking"
 # Hermes version this profile is pinned against (single comparator, checked
 # against hermes_cli.__version__ at install time).

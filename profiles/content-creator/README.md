@@ -46,6 +46,26 @@ content-creator chat
 | `skills/x-posting/` | Draft + publish posts/threads via X API v2 (`/2/tweets`) |
 | `cron/content-pipeline.yaml` | Template for a weekday-morning pipeline check (drafts only) |
 
+## Default skills
+
+`linkedin-posting` and `x-posting` are this profile's default skills:
+`SOUL.md` instructs the agent to load the relevant one (via the `skill_view`
+tool) before drafting or publishing for a platform, so posts follow the
+skills' format and publishing rules without any flags.
+
+To preload them deterministically at launch instead, pass `-s`:
+
+```bash
+hermes -p content-creator -s linkedin-posting,x-posting chat
+```
+
+Tip: wrap that in your own shell alias (the `--alias` wrapper runs plain
+`hermes -p content-creator`):
+
+```bash
+alias creator='hermes -p content-creator -s linkedin-posting,x-posting'
+```
+
 ## Credentials for posting
 
 Both posting skills are optional — drafting works without them.

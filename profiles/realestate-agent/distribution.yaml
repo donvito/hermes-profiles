@@ -1,7 +1,7 @@
 # Hermes profile distribution manifest.
 # Schema: hermes_cli/profile_distribution.py (DistributionManifest) in hermes-agent.
 name: realestate-agent
-version: 0.1.0
+version: 0.1.1
 description: "Real-estate assistant — listings, comps, and market watch"
 hermes_requires: ">=0.18.0"
 author: "hermes-profiles maintainers"
