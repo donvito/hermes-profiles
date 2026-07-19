@@ -1,5 +1,10 @@
 # Changelog — realestate-agent
 
+## Unreleased
+
+- Preload `listing-writer` and `comp-analysis` via `skills.defaults` on every
+  new session (requires hermes-agent `skills.defaults` support).
+
 ## 0.1.0
 
 - Initial release.

@@ -123,7 +123,7 @@ by installs or updates.
 profiles/legal-person/
 ├── distribution.yaml      # manifest — name, version, hermes_requires, env vars
 ├── SOUL.md                # personality / operating rules
-├── config.yaml            # non-secret settings, incl. mcp_servers
+├── config.yaml            # non-secret settings, incl. mcp_servers + skills.defaults
 ├── skills/
 │   ├── contract-review/SKILL.md
 │   └── case-summary/SKILL.md
@@ -132,6 +132,12 @@ profiles/legal-person/
 ├── .gitignore             # keeps secrets/user data out if developed in place
 ├── README.md · CHANGELOG.md · LICENSE.md
 ```
+
+Each profile's `config.yaml` lists its role skills under `skills.defaults` so
+a fresh install preloads them on every new session (CLI, TUI, gateway, cron)
+without needing `hermes -s …` each time. That depends on hermes-agent support
+for `skills.defaults`; older Hermes versions ignore the key and leave the
+skill files available for manual `/skill` use.
 
 See [`compat.md`](compat.md) for how each piece maps onto the hermes-agent
 code and which Hermes versions are supported.

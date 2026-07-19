@@ -40,9 +40,9 @@ realestate-agent chat
 |---|---|
 | `distribution.yaml` | Manifest: name, version, `hermes_requires`, env vars |
 | `SOUL.md` | Identity: fact-driven, fair-housing-safe, no invented numbers |
-| `config.yaml` | Model/provider defaults + a disabled filesystem MCP server |
-| `skills/listing-writer/` | Portal-ready listings with a compliance pass |
-| `skills/comp-analysis/` | CMA-style pricing with explicit adjustments |
+| `config.yaml` | Model/provider defaults, `skills.defaults` preload list, disabled filesystem MCP |
+| `skills/listing-writer/` | Portal-ready listings with a compliance pass (preloaded) |
+| `skills/comp-analysis/` | CMA-style pricing with explicit adjustments (preloaded) |
 | `cron/market-watch.yaml` | Template for a weekday-morning market brief |
 
 ## Cron
